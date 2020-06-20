@@ -1,9 +1,5 @@
 # SFND 2D Feature Tracking
 
-[TOC]
-
-
-
 The idea of the camera project is to build a collision detection system - that's the overall goal for the Final Project. As a preparation for this, you will now build the feature tracking part and test various detector / descriptor combinations to see which ones perform best. This mid-term project consists of four parts:
 
 * First, you will focus on loading images, setting up data structures and putting everything into a ring buffer to optimize memory load. 
@@ -31,8 +27,6 @@ The number of key-points on the preceding vehicle for all 10 images are listed i
 | **frame8**       | 210points/19.35ms | 1366points/15.16ms | 1695points/1.11ms  | 2628points/46.47ms | 500points/7.83ms  | 1331points/105.46ms | 1382points/133.22ms |
 | **frame9**       | 171points/17.91ms | 1389points/12.04ms | 1749points/1.15ms  | 2639points/46.75ms | 500points/8.03ms  | 1357points/107.08ms | 1463points/136.62ms |
 | **frame10**      | 281points/22.23ms | 1339points/12.19ms | 1770points/1.16ms  | 2672points/46.96ms | 500points/8.46ms  | 1331points/110.19ms | 1422points/125.57ms |
-
-
 
 The following pictures demonstrate the detector results:
 
@@ -64,7 +58,9 @@ The following pictures demonstrate the detector results:
 
   <img src="images/SIFT.PNG" width="820" height="248"/>
 
+Summary:
 
+​	Harris has very small number of key points. ORB's number of key points are limited by the detector parameter. BRISK has very large number of key points. All 	the algorithm has good key points distributions. Overall, FAST seems to have some performance advantage over good key point quality and quantity.
 
 ### MP.8
 
