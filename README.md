@@ -37,18 +37,31 @@ The number of key-points on the preceding vehicle for all 10 images are listed i
 The following pictures demonstrate the detector results:
 
 * Harris
+
   <img src="images/Harris.png" width="820" height="248" />
+
 * SHITOMASI
+
   <img src="images/SHITOMASI.png" width="820" height="248"/>
+
 * FAST
+
   <img src="images/FAST.png" width="820" height="248"/>
+
 * BRISK
+
   <img src="images/brisk.png" width="820" height="248"/>
+
 * ORB
+
   <img src="images/ORB.png" width="820" height="248"/>
+
 * AKAZE
+
   <img src="images/AKAZE.png" width="820" height="248"/>
+
 * SIFT
+
   <img src="images/SIFT.png" width="820" height="248"/>
 
 
