@@ -64,11 +64,36 @@ Harris has very small number of key points. ORB's number of key points are limit
 
 ### MP.8
 
+The following matrix shows the detector-descriptor combinations' key points match counts for the key points on the preceding vehicle.
+
+| Descriptor\Detector | Harris | SHITOMASI | FAST | BRISK | ORB  | AKAZE | SIFT |
+| ------------------- | ------ | --------- | ---- | ----- | ---- | ----- | ---- |
+| **BRISK**           | 137    | 756       | 858  | 1546  | 728  | 1204  | 586  |
+| **BRIEF**           | 164    | 928       | 1042 | 1676  | 530  | 1257  | 693  |
+| **ORB**             | 157    | 891       | 1015 | 1480  | 731  | 731   | x    |
+| **FREAK**           | 140    | 758       | 838  | 1494  | 396  | 1179  | 588  |
+| **AKAZE**           | x      | x         | x    | x     | x    | 1249  | x    |
+| **SIFT**            | 157    | 910       | 993  | 1617  | 736  | 1263  | 790  |
+
+
+
 ### MP.9 
 
+The following matrix shows the average time, in ms, for the detector-descriptor combination to finish processing a single frame.
 
+| Descriptor\Detector | Harris | SHITOMASI | FAST     | BRISK  | ORB       | AKAZE  | SIFT   |
+| ------------------- | ------ | --------- | -------- | ------ | --------- | ------ | ------ |
+| **BRISK**           | 420    | 431.85    | 412.08   | 876.76 | 409.13    | 519.54 | 541.67 |
+| **BRIEF**           | 23.60  | 24.98     | **8.36** | 443.82 | **10.82** | 122.99 | 122.81 |
+| **ORB**             | 23.63  | 22.30     | **5.11** | 456.00 | 15.17     | 121.23 | x      |
+| **FREAK**           | 64.11  | 71.67     | 60.44    | 502.11 | 508.59    | 172.88 | 216.51 |
+| **AKAZE**           | x      | x         | x        | x      | x         | 222.82 | x      |
+| **SIFT**            | 218.98 | 64.21     | 164.30   | 928.58 | 262.83    | 230.06 | 279.41 |
+
+The top 3 combinations are FAST-BRIEF, FAST-ORB, ORB-BRIEF.
 
 ## Dependencies for Running Locally
+
 * cmake >= 2.8
   * All OSes: [click here for installation instructions](https://cmake.org/install/)
 * make >= 4.1 (Linux, Mac), 3.81 (Windows)
