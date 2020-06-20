@@ -60,7 +60,7 @@ The following pictures demonstrate the detector results:
 
 Summary:
 
-​	Harris has very small number of key points. ORB's number of key points are limited by the detector parameter. BRISK has very large number of key points. All 	the algorithm has good key points distributions. Overall, FAST seems to have some performance advantage over good key point quality and quantity.
+Harris has very small number of key points. ORB's number of key points are limited by the detector parameter. BRISK has very large number of key points. All 	the algorithm has good key points distributions. Overall, FAST seems to have some performance advantage over good key point quality and quantity.
 
 ### MP.8
 
