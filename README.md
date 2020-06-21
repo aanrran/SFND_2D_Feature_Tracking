@@ -7,6 +7,8 @@ The idea of the camera project is to build a collision detection system - that's
 * In the next part, you will then focus on descriptor extraction and matching using brute force and also the FLANN approach we discussed in the previous lesson. 
 * In the last part, once the code framework is complete, you will test the various algorithms in different combinations and compare them with regard to some performance measures. 
 
+------
+
 ## Analysis for MP7 ~ MP9
 
 Following are  my analysis for the project part7 to part9:
@@ -91,6 +93,20 @@ The following matrix shows the average time, in ms, for the detector-descriptor 
 | **SIFT**            | 218.98 | 64.21     | 164.30   | 928.58 | 262.83    | 230.06 | 279.41 |
 
 The top 3 combinations are FAST-BRIEF, FAST-ORB, ORB-BRIEF.
+
+- FAST-BRIEF
+
+  <img src="images/SIFT.PNG" width="820" height="248"/>
+
+- FAST-ORB
+
+  <img src="images/SIFT.PNG" width="820" height="248"/>
+
+- ORB-BRIEF
+
+  <img src="images/SIFT.PNG" width="820" height="248"/>
+
+------
 
 ## Dependencies for Running Locally
 
