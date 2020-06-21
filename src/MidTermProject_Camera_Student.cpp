@@ -23,7 +23,9 @@ int main(int argc, const char *argv[])
 {
 
     /* INIT VARIABLES AND DATA STRUCTURES */
-
+    //count the total # matches
+    int matchCounter = 0;
+  	double totalProcessTime = 0.00;
     // data location
     string dataPath = "../";
 
@@ -73,12 +75,13 @@ int main(int argc, const char *argv[])
 
         // extract 2D keypoints from current image
         vector<cv::KeyPoint> keypoints; // create empty feature list for current image
-        string detectorType = "SIFT"; //HARRIS, SHITOMASI, FAST, BRISK, ORB, AKAZE, SIFT 
+        string detectorType = "ORB"; //HARRIS, SHITOMASI, FAST, BRISK, ORB, AKAZE, SIFT 
 
         //// STUDENT ASSIGNMENT
         //// TASK MP.2 -> add the following keypoint detectors in file matching2D.cpp and enable string-based selection based on detectorType
         //// -> HARRIS, FAST, BRISK, ORB, AKAZE, SIFT
-
+      	double detectionTime = (double)cv::getTickCount();
+    
         if (detectorType.compare("SHITOMASI") == 0) {
             detKeypointsShiTomasi(keypoints, imgGray, bVis);
         }
@@ -86,6 +89,8 @@ int main(int argc, const char *argv[])
             detKeypointsHarris(keypoints, imgGray, bVis);
         }
       	else detKeypointsModern(keypoints, imgGray, detectorType, bVis);
+
+      	detectionTime = ((double)cv::getTickCount() - detectionTime) / cv::getTickFrequency();
         //// EOF STUDENT ASSIGNMENT
 
         //// STUDENT ASSIGNMENT
@@ -131,40 +136,48 @@ int main(int argc, const char *argv[])
         //// STUDENT ASSIGNMENT
         //// TASK MP.4 -> add the following descriptors in file matching2D.cpp and enable string-based selection based on descriptorType
         //// -> BRIEF, ORB, FREAK, AKAZE, SIFT
-
+      	double descriptionTime = (double)cv::getTickCount();
+      
         cv::Mat descriptors;
-        string descriptorType = "SIFT"; //BRISK, BRIEF, ORB, FREAK, AKAZE, SIFT
+        string descriptorType = "BRIEF"; //BRISK, BRIEF, ORB, FREAK, AKAZE, SIFT
         descKeypoints((dataBuffer.end() - 1)->keypoints, (dataBuffer.end() - 1)->cameraImg, descriptors, descriptorType);
+      
+
+      	descriptionTime = ((double)cv::getTickCount() - descriptionTime) / cv::getTickFrequency();
         //// EOF STUDENT ASSIGNMENT
 
         // push descriptors for current frame to end of data buffer
         (dataBuffer.end() - 1)->descriptors = descriptors;
 
         cout << "#3 : EXTRACT DESCRIPTORS done" << endl;
-
+      
+      	double matchTime = 0.00;
         if (dataBuffer.size() > 1) // wait until at least two images have been processed
         {
 
             /* MATCH KEYPOINT DESCRIPTORS */
 
             vector<cv::DMatch> matches;
-            string matcherType = "MAT_BF";        // MAT_BF, MAT_FLANN
-            string descriptorType = "DES_HOG"; // DES_BINARY, DES_HOG
+            string matcherType = "MAT_BF";        // MAT_BF(Brute-Force Matching), MAT_FLANN(fast library for approximate nearest neighbors)
+            string descriptorType = "DES_BINARY"; // DES_BINARY(for BRISK, BRIEF, ORB, FREAK, AKAZE), DES_HOG(for SIFT) 
             string selectorType = "SEL_KNN";       // SEL_NN, SEL_KNN
 
             //// STUDENT ASSIGNMENT
             //// TASK MP.5 -> add FLANN matching in file matching2D.cpp
             //// TASK MP.6 -> add KNN match selection and perform descriptor distance ratio filtering with t=0.8 in file matching2D.cpp
-
+          	double matchTime = (double)cv::getTickCount();
+     
             matchDescriptors((dataBuffer.end() - 2)->keypoints, (dataBuffer.end() - 1)->keypoints,
                              (dataBuffer.end() - 2)->descriptors, (dataBuffer.end() - 1)->descriptors,
                              matches, descriptorType, matcherType, selectorType);
 
+          	matchTime = ((double)cv::getTickCount() - matchTime) / cv::getTickFrequency();
+          
+          	matchCounter += matches.size();
             //// EOF STUDENT ASSIGNMENT
-
+          
             // store matches in current data frame
             (dataBuffer.end() - 1)->kptMatches = matches;
-
             cout << "#4 : MATCH KEYPOINT DESCRIPTORS done" << endl;
 
             // visualize matches between current and previous image
@@ -187,7 +200,13 @@ int main(int argc, const char *argv[])
             bVis = false;
         }
 
+      //record the sum of the detectionTime descriptionTime //matchTime
+      totalProcessTime += (1000 * (detectionTime + descriptionTime)/1.0);
     } // eof loop over all images
 
+  //print out the total number of matches from the 10 frames
+  std::cout << std::endl << "the total number of matches: " << matchCounter << std::endl;
+  //print the average process time for each frame over the 10 frames
+  std::cout << std::endl << "the average process time: " << totalProcessTime/10.00 << std::endl;
     return 0;
 }

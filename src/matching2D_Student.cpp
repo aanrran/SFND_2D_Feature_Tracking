@@ -66,7 +66,7 @@ void detKeypointsHarris(std::vector<cv::KeyPoint> &keypoints, cv::Mat &imgGray, 
     string windowName = "Harris Corner Detection Results";
     cv::namedWindow(windowName, 6);
     cv::Mat visImage = dst_norm_scaled.clone();
-    cv::drawKeypoints(dst_norm_scaled, keypoints, visImage, cv::Scalar::all(-1), cv::DrawMatchesFlags::DRAW_RICH_KEYPOINTS);
+    cv::drawKeypoints(imgGray, keypoints, visImage, cv::Scalar::all(-1), cv::DrawMatchesFlags::DRAW_RICH_KEYPOINTS);
     cv::imshow(windowName, visImage);
     cv::waitKey(0);
   }
@@ -191,15 +191,15 @@ void matchDescriptors(std::vector<cv::KeyPoint> &kPtsSource, std::vector<cv::Key
                       std::vector<cv::DMatch> &matches, std::string descriptorType, std::string matcherType, std::string selectorType)
 {
     // configure matcher
-    bool crossCheck = true;
+    bool crossCheck = false;
     cv::Ptr<cv::DescriptorMatcher> matcher;
-
+  	//Brute-Force Matching 
     if (matcherType.compare("MAT_BF") == 0) {
       int normType = descriptorType.compare("DES_BINARY") == 0 ? cv::NORM_HAMMING : cv::NORM_L2;
       matcher = cv::BFMatcher::create(normType, crossCheck);
       cout << "BF matching cross-check=" << crossCheck;
     }
-    else if (matcherType.compare("MAT_FLANN") == 0) {
+    else if (matcherType.compare("MAT_FLANN") == 0) { //fast library for approximate nearest neighbors matching
       if (descSource.type() != CV_32F)
       { // OpenCV bug workaround : convert binary descriptors to floating point due to a bug in current OpenCV implementation
         descSource.convertTo(descSource, CV_32F);
