@@ -92,19 +92,23 @@ The following matrix shows the average time, in ms, for the detector-descriptor 
 | **AKAZE**           | x      | x         | x        | x      | x         | 222.82 | x      |
 | **SIFT**            | 218.98 | 64.21     | 164.30   | 928.58 | 262.83    | 230.06 | 279.41 |
 
-The top 3 combinations are FAST-BRIEF, FAST-ORB, ORB-BRIEF.
+The top 3 combinations are FAST-BRIEF, FAST-ORB, ORB-BRIEF.  
+
+
+
+Below are some match results for the preceding vehicle:
 
 - FAST-BRIEF
 
-  <img src="images/SIFT.PNG" width="820" height="248"/>
+  <img src="images/FASTBRIEF.PNG" width="820" height="248"/>
 
 - FAST-ORB
 
-  <img src="images/SIFT.PNG" width="820" height="248"/>
+  <img src="images/FASTORB.PNG" width="820" height="248"/>
 
 - ORB-BRIEF
 
-  <img src="images/SIFT.PNG" width="820" height="248"/>
+  <img src="images/ORBBRIEF.PNG" width="820" height="248"/>
 
 ------
 
