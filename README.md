@@ -139,4 +139,4 @@ Below are some match results for the preceding vehicle:
 
 
 
-<img src="images/reference.PNG" width="500" height="300"/>
+<img src="images/reference.png" width="500" height="300"/>
